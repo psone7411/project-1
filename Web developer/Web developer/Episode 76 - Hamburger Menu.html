@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episode 76</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;          
+        }
+        body{
+            background-color: rgb(22, 25, 67);
+        }
+       .container{
+        width: 700px;
+        margin:200px auto ;
+        background-color:aqua;
+        position: relative;
+       }
+       .hamContainer{     
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+        z-index: 1;
+       }
+       .hum{
+        width:40px;
+        height:5px;
+        margin-top: 4px;
+        background-color: rgb(225, 225, 225); 
+       }
+       .line1,.line2,.line3,.viewPoint{
+        transition: 0.5s ease;
+       }
+       .tranLine2{
+        opacity: 0;
+       }
+       .tranLine1{
+        transform: rotate(45deg) translate(4px,9px);
+       }
+       .tranLine3{
+        transform: rotate(-45deg) translate(4px,-9px);
+       }
+       .viewPoint{
+        width: 100%;
+        height: 100%;
+        background-color: rgb(62, 61, 0);
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+       }
+       .viewPoint ul{
+        font-size: 20px;
+        color: white;
+        text-align: center;
+       }
+       .viewPoint ul li{
+        list-style-type: none;
+        padding: 20px;
+        cursor: pointer;
+        transition: 0.5s ease;
+       }
+       .viewPoint ul li:hover{
+        opacity: 0.8;
+       }
+       .showView{
+        opacity: 1;
+       }
+       .trans{
+        transform: translateY(-10px);
+       }
+    </style>
+</head>
+<body>
+       <div class="container">
+         <div class="hamContainer">
+            <div class="hum line1"></div>
+            <div class="hum line2"></div>
+            <div class="hum line3"></div>
+         </div>  
+       </div>
+       <div class="viewPoint">
+            <ul>
+                <li>Home</li>
+                <li>Services Us</li>
+                <li>About Us</li>
+                <li>Contact Us</li>
+            </ul>
+       </div>
+       <script>
+        let hamContainer=document.querySelector(".hamContainer");
+        let line1=document.querySelector(".line1")
+        let line2=document.querySelector(".line2")
+        let line3=document.querySelector(".line3")
+        let viewPoint=document.querySelector(".viewPoint");
+        let liTag=document.getElementsByTagName("li")
+        hamContainer.addEventListener("click",_=>{
+            if(hamContainer.classList.contains("isOpened")){
+                line2.classList.remove("tranLine2");
+                line1.classList.remove("tranLine1");
+                line3.classList.remove("tranLine3");
+                hamContainer.classList.remove("isOpened");
+                viewPoint.classList.remove("showView");
+                for(let i=0;i<liTag.length;i++){
+                    liTag[i].classList.remove("trans");
+                } 
+            }else{
+                line2.classList.add("tranLine2");
+                line1.classList.add("tranLine1");
+                line3.classList.add("tranLine3");
+                hamContainer.classList.add("isOpened");
+                viewPoint.classList.add("showView");
+                for(let i=0;i<liTag.length;i++){
+                    liTag[i].classList.add("trans");
+                } 
+            }
+        })
+       </script>
+</body>
+</html>

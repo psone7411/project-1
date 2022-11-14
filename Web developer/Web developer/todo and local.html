@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice</title>
+    <style>
+      .textarea{
+        outline: none;
+      }
+      .button{
+        padding: 5px 15px;
+        font-size: 1em;
+        outline: none;
+      }
+    </style>
+</head>
+<body>
+    <textarea name="" class="textarea" cols="30" rows="10"></textarea>
+    <br><br>
+    <button class="button">Click</button>
+    <ul class="ul"></ul>
+    <script>
+        let textarea=document.getElementsByClassName("textarea")[0];
+        let button=document.getElementsByClassName("button")[0];
+        let ul=document.getElementsByClassName("ul")[0];
+
+        // showInput group
+        function showInput(e,y){
+            // ul.innerHTML+=`<li>${e}</li>`
+            let li=document.createElement("li");
+            let del =document.createElement("button")
+            let edit=document.createElement("button")
+            let text=document.createElement("span")
+            // y ကိုထည့်ရခြင်းအကြောင်းအရင်းမှာ li ထဲမှာရှိတဲ့စာကြောင်းတိုင်းကို လှမ်းယူရင် ဖမ်းမိအောင် parametre ပေးထားခြင်းဖြစ်သည်။
+            edit.append("Edit")
+            edit.setAttribute("onclick",`edit("${y}")`)
+            li.appendChild(edit)
+            del.append("delete")
+            del.setAttribute("onclick","del("+y+")")
+            li.appendChild(del)
+            text.append(" "+e)
+            text.setAttribute("id","text"+y)
+            li.append(text)
+            li.setAttribute("id","delList"+y)     
+            li.classList.add("list");
+            ul.appendChild(li);
+        }      
+        
+        // id group
+          let id=1;
+          let k=Object.keys(localStorage);
+          k.sort()
+          if(localStorage.length>0){
+            id=Number(k[k.length-1])+1;
+          }
+        function save(x){
+          localStorage.setItem(id,x);
+          id++
+        }
+
+        // localStorage ထဲမှာ သိမ်းထားတဲ့ဟာကို showInput မှာပြတာ
+        function showList(){
+          k.map(function(el){
+            showInput(localStorage.getItem(el),el)
+          })
+        }
+        showList()
+
+        // ဖျက်တဲ့ group
+        function del(x){
+          localStorage.removeItem(x)
+          let current=document.getElementById("delList"+x);
+          current.remove()
+        }
+    
+        function edit(x){
+          
+          let editText=document.getElementById("text"+x)
+          let editValue=prompt("fill in new name",editText.innerText)
+          editText.innerText=editValue;
+          let output1=editText.innerText;
+          save(output1)
+          // localStorage.removeItem(x);
+          // if(editText.innerText=editValue){
+          //   localStorage.setItem(id,`editText.innerText${x}`)
+          // }
+        }
+
+        // click group      
+            textarea.addEventListener("keyup",e=>{
+            if(e.keyCode===13){
+              // textarea.value ကို variable တစ်ခုထဲသိမ်းမှ localStorage ထဲမှာ ပေါ်မယ်
+              let output= textarea.value;
+                showInput(output)
+                textarea.value="";
+                save(output)
+            }          
+        })
+       // button.addEventListener("click",_=>{
+        //   let output= showInput(textarea.value);
+        //    textarea.value="";
+        //    save(textarea.value)         
+        // })
+
+    </script>
+</body>
+</html>

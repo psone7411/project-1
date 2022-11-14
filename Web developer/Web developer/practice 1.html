@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice 1</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;              
+        }
+       /* .container{
+        height: 100%;
+        } */
+      .div{ 
+        /* display: none; */
+        width: 100%;
+        font-size: 20px;    
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        position: fixed;
+        bottom: 0;
+      }
+      .text{
+        padding:20px 50px;
+        background-color: rgb(164, 164, 164);
+        position: relative;
+        transition: 0.5s ease-in-out;
+      }
+      .divBlock{
+        /* display: block; */
+     
+      }
+      button{
+        padding: 10px 20px;
+        margin:10px;
+        background-color: rgb(115, 65, 5);
+        color: white;
+        border: none;
+        transition: 0.2s;
+      }
+      button:hover{
+        transform:scale(1.1);
+      }
+    </style>
+</head>
+<body>
+            <div class="container">
+                <button>showInButton</button>
+                <div class="div">
+                    <!-- <p class="text">Link copied to clipboard</p> -->
+                </div>
+            </div>
+           
+            <script>
+                let div=document.getElementsByClassName("div")[0];
+                let button=document.getElementsByTagName("button")[0];
+                // let text=document.getElementsByClassName("text")[0];
+                button.addEventListener("click",_=>{
+                  div.innerHTML="";
+                    let text=document.createElement("p");
+                    text.append("Link copied to clipboard");
+                    text.classList.add("text");
+                    div.appendChild(text);
+                    text.style.bottom=`-${text.offsetHeight}px`;
+                    setTimeout(_=>{
+                      text.style.bottom=`0px`;
+                    },100);
+                    setTimeout(_=>{
+                      text.style.bottom=`-${text.offsetHeight}px`;
+                    },3000)
+                   
+                    
+                   
+                    // if(button.classList.contains("isOpened")){
+                    //     div.classList.remove("divBlock")
+                    //     button.classList.remove("isOpened")
+                    // }else{                      
+                    //     div.classList.add("divBlock")
+                    //     button.classList.add("isOpened")
+                    // }
+                   
+                })
+            </script>
+</body>
+</html>

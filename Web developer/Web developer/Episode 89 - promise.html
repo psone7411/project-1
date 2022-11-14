@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+<body>
+
+    <script>
+       const login=()=>{
+        let logInData =new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve("login finished")
+            },1000)
+        })
+        return logInData
+       }
+       const fetch =()=>{
+          return new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                resolve("fetchData arrived")
+            },1000)
+          })
+       }
+       const photo=()=>{
+        return new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                // resolve("photo have been fetch")
+                reject("this have a problem")
+            },1000)
+        })
+       }
+       const friend=()=>{
+        return new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                resolve ("friend have been fetch")
+            },1000)
+        })
+       }
+       const video=()=>{
+        return new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                resolve("video have been fetch")
+            },1000)
+        })
+       }
+
+       //    Async await
+    //    async function ဖြစ်မှ await ကို return ပြန်ပေးတယ်
+    // catch ကိုရေးရင် tryCatch နဲ့လည်းရေးလို့ရတယ်
+    const await =async ()=>{         
+                let loginData =await login();
+                console.log(loginData)
+                let fetchData=await fetch();
+                console.log(fetchData)
+                let photoData=await photo();
+                console.log(photoData)
+                let friendData=await friend();
+                console.log(friendData)
+                let videoData=await video();
+                console.log(videoData)
+       }
+
+    await().catch((error)=>{
+        console.log(error)
+    })
+
+       //    promise chaining
+    //    login().then((loginData)=>{
+    //     console.log(loginData);
+    //     return fetch()
+    //    }) 
+    //    //    fetch() မှာ return ပြန်ပေးမှ then အလုပ်လုပ်မယ်
+    //    .then((fetchData)=>{
+    //     console.log(fetchData);
+    //     return photo()
+    //    })
+    //    .then((photoData)=>{
+    //     console.log(photoData)
+    //     return friend()
+    //    })
+    //    .then((friendData)=>{
+    //     console.log(friendData)
+    //     return video()
+    //    })
+    //    .then((videoData)=>{
+    //     console.log(videoData)
+    //    })
+    //    .catch((error)=>{
+    //     console.log(error)
+    //    })
+
+        // const logIn=()=>{
+        //     let logInData=new Promise((resolve,reject)=>{
+        //         setTimeout(()=>{
+        //             resolve("login finished")
+        //         },2000)
+        //     })
+        //     return logInData;
+        // }
+
+        // const fetch=()=>{
+        //     return new Promise((resolve,reject)=>{
+        //         setTimeout(()=>{
+        //             resolve("fetchData arrived")
+        //         },2000)
+        //     })
+        // }
+
+        // const showData=(data)=>{
+        //     console.log("showing Data:",data)
+        // }
+
+        // logIn().then((data)=>{
+        //     console.log(data)
+        //     fetch().then((userData)=>{
+        //         console.log(userData)
+        //         showData(userData)
+        //     })
+        // })
+    </script>
+</body>
+</html>

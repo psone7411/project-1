@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>episode 78</title>
+    <style> 
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+        body{
+            background-color: rgb(2, 2, 78);
+        }
+        .container{
+            margin-top: 100px;
+            margin-left:150px;
+        }
+        .tabMenu{
+            /* offsetLeft က non-static ပေါ်ဘဲမှိခိုတယ် အဲ့ဒါကြောင့် tabMenu ကို non-static ပြောင်းပေးတာ*/
+            position: relative;
+        }
+        .slider{
+            height: 5px;
+            background-color: rgb(84, 0, 162);
+            transition: 0.4s ease-in-out;
+        }
+        ul{
+            color: rgb(234, 233, 233);
+        }
+        ul li{
+            display: inline-block;
+            list-style-type: none;
+            background-color: rgb(100, 55, 0);
+            cursor: pointer;
+            user-select: none;
+            padding: 10px 20px;
+        }
+        .title{
+            color: white;
+            display: none;
+        }
+        .oneToOne{
+            color: white;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabMenu">
+            <ul></ul>
+        </div>
+        <div class="slider"></div>
+    </div>
+    <div>
+        <p class="home title" >this is home</p>
+        <p class="service title">this is service</p>
+        <p class="About title">this is About us</p>
+        <p class="Contact title">this is Contact Us</p>
+        <p class="Login title">this is Login</p>
+
+    </div>
+    <script>
+        let container=document.querySelector(".container");
+        let tabMenu=document.querySelector(".tabMenu");
+        let slider=document.querySelector(".slider");
+        let ulTag=document.querySelector("ul");
+        let title=document.querySelectorAll(".title");
+        let home=document.querySelector(".home");
+        let service=document.querySelector(".service");
+        let About=document.querySelector(".About");
+        let contact=document.querySelector(".Contact");
+        let login=document.querySelector(".Login");
+       
+        const tab=["home","services","About us","contact us","login"];
+        const handleTabchange=(e)=>{
+              const clickedTabId= e.target.id;
+              const clickedLiTag=document.getElementById(clickedTabId);
+              const clickedLiTagWidth=clickedLiTag.offsetWidth+"px";
+              const clickedLiTagOffsetLeft=clickedLiTag.offsetLeft+"px";
+              slider.style.width=clickedLiTagWidth;
+              slider.style.transform=`translate(${clickedLiTagOffsetLeft})`
+        }
+        for(let i=0;i<tab.length;i++){
+            let liTag=document.createElement("li");
+            liTag.append(tab[i].toUpperCase());
+            liTag.id=i;
+            ulTag.appendChild(liTag);
+            liTag.addEventListener("click",handleTabchange)
+            if(i===0){
+                slider.style.width=liTag.offsetWidth+"px";
+            }
+         
+        }
+        
+    </script>
+</body>
+</html>

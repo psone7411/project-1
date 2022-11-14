@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>local storage 2</title>
+</head>
+<body>
+</body>
+<script>
+    const object1=[
+    {
+        name:"kaykay",
+        age:23,
+        skills:"html,css,js"
+    },
+     {
+        name:"pyaesone",
+        age:22,
+        skills:"nothing"
+    }
+    ]
+    const jsonToJs =JSON.stringify(object1);
+    localStorage.setItem("jsonToJs",jsonToJs);
+    const recive=localStorage.getItem("jsonToJs");
+    const nextMove=JSON.parse(recive);
+    console.log(nextMove[0].name)
+    // const nextMove=JSON.parse(recive);
+    // console.log(nextMove.name)
+    // const jsToJson=JSON.parse(getItem);
+    // console.log(jsToJson.name)
+</script>
+</html>
